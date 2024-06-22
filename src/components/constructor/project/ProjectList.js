@@ -10,30 +10,22 @@ function ProjectList({stageUpdateSink, username}){
 
     const retrieveProjectsForUser = async () =>
     {
-        const prj_rersponse = await axios.get(`http://localhost:8000/maf/projects/${username}`);
+        const prj_rersponse = await axios.get(`http://localhost:8000/maf/projects/${username}`)
+            .then(
+                (prj_rersponse) => {
+                    const {data} = prj_rersponse;
 
-        const {data} = prj_rersponse;
+                    console.log(data);
 
-        console.log(data);
-
-        const existing_projects = [];
-
-        while(projects.length > 0){
-            projects.pop()
-        }
-
-        data.projects.forEach(
-            (recv_project) => {
-                projects.push(recv_project);
-            }
-        );
-        console.log(projects);
+                    setProjects(data.projects);
+                }
+            );
 
     }
 
     useEffect(() => {
         retrieveProjectsForUser();
-    })
+    },[])
 
     return (
         <div className="flex">
