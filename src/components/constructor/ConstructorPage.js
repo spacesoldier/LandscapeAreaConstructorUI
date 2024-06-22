@@ -1,36 +1,52 @@
 import React from "react";
-import SimpleCard from "./SimpleCard";
-import {FeaturedImageGallery} from "./ImageGallery";
-import {SidebarWithCta} from "./SidebarWithCta";
-import {SystemNavbar} from "./SystemNavbar";
+import SimpleCard from "./elements/SimpleCard";
+import {FeaturedImageGallery} from "./elements/ImageGallery";
+import {SidebarWithCta} from "./elements/SidebarWithCta";
+import {SystemNavbar} from "./elements/SystemNavbar";
+import {Badge, Button, Card, CardBody, CardFooter, Typography} from "@material-tailwind/react";
+import {FaCalculator, FaCheck, FaList, FaPlus} from "react-icons/fa6";
+import ProjectList from "./project/ProjectList";
+import DefineProjectContent from "./project/DefineProjectContent";
+import ProjectReport from "./project/ProjectReport";
 // import { useKeycloak } from "@react-keycloak/web";
 
 function ConstructorPage(){
 
     // const { keycloak, initialized } = useKeycloak();
 
+    const curr_username = "architect"
+
+    const [currentStage,setCurrentStage] = React.useState("projects");
+
+    const updateStage = (newStage) => {
+        setCurrentStage(newStage);
+    }
+
+    const page_selector = {
+        "projects": (stageSink) => {
+            return (
+                <ProjectList username={curr_username} stageUpdateSink={stageSink} />
+            );
+        },
+        "new-project": (stageSink) => {
+            return (
+                <DefineProjectContent stageUpdateSink={stageSink}/>
+            );
+        },
+        "project-overview": (stageSink) =>{
+            return (
+                <ProjectReport stageUpdateSink={stageSink}/>
+            );
+        }
+    }
+
     return (
         <div className="App">
             <SystemNavbar />
 
-            <div class="container">
-                <h1 className="bg-slate-500 text-black text-center">Тут будет список проектов пользователя</h1>
-            </div>
-            <div class="gap-8 columns-3">
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-            </div>
-            <div class="container content-center">
-                <FeaturedImageGallery />
-            </div>
-            <SidebarWithCta />
+            <section className="flex">
+                {page_selector[currentStage](updateStage)}
+            </section>
         </div>
     );
 }
