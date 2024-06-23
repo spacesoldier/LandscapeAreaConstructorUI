@@ -5,9 +5,9 @@ import {SidebarWithCta} from "./elements/SidebarWithCta";
 import {SystemNavbar} from "./elements/SystemNavbar";
 import {Badge, Button, Card, CardBody, CardFooter, Typography} from "@material-tailwind/react";
 import {FaCalculator, FaCheck, FaList, FaPlus} from "react-icons/fa6";
-import ProjectList from "./project/ProjectList";
-import DefineProjectContent from "./project/DefineProjectContent";
-import ProjectReport from "./project/ProjectReport";
+import ProjectList from "./project/list/ProjectList";
+import DefineProjectContent from "./project/draft/DefineProjectContent";
+import ProjectReport from "./project/report/ProjectReport";
 // import { useKeycloak } from "@react-keycloak/web";
 
 function ConstructorPage(){
@@ -41,10 +41,10 @@ function ConstructorPage(){
     }
 
     return (
-        <div className="App">
+        <div className="App h-full">
             <SystemNavbar />
 
-            <section className="flex">
+            <section className="flex grow h-[calc(90%)]">
                 {page_selector[currentStage](updateStage)}
             </section>
         </div>

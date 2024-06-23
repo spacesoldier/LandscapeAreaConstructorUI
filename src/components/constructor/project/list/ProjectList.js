@@ -3,6 +3,7 @@ import {FaPlus} from "react-icons/fa6";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import ProjectCard from "./ProjectCard";
+import {nanoid} from "nanoid";
 
 function ProjectList({stageUpdateSink, username}){
 
@@ -41,7 +42,7 @@ function ProjectList({stageUpdateSink, username}){
     const initNewProrject = async () => {
 
         let newProject = {
-            project_id: "1244777",
+            project_id: nanoid(8),//"1244777",
             project_name: "to-be-defined",
             owner: username,
             "develop_areas": {
