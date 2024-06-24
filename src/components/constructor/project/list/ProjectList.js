@@ -15,7 +15,7 @@ function ProjectList({stageUpdateSink, username}){
     const retrieveProjectsForUser = async () =>
     {
         try {
-            await axios.get(`${baseUrl}/maf/user/projects/${username}`, config)
+            await axios.get(`/maf/user/projects/${username}`, config)
                 .then(
                     (prj_response) => {
                         const {data} = prj_response;
@@ -34,17 +34,11 @@ function ProjectList({stageUpdateSink, username}){
         retrieveProjectsForUser();
     },[])
 
-    // const config = {
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         // 'Authorization': `Bearer ${keycloak_token}`
-    //     }
-    // }
 
     const initNewProrject = async () => {
 
         let newProject = {
-            project_id: nanoid(8),//"1244777",
+            project_id: nanoid(8),
             project_name: "to-be-defined",
             owner: username,
             "develop_areas": {
@@ -61,8 +55,8 @@ function ProjectList({stageUpdateSink, username}){
         }
 
         axios.all([
-                    axios.post(`${baseUrl}/maf/projects/new`,newProject, config),
-                    axios.post(`${baseUrl}/maf/tasks/current/`, ownerTaskUpdate, config)
+                    axios.post(`/maf/projects/new`,newProject, config),
+                    axios.post(`/maf/tasks/current`, ownerTaskUpdate, config)
                 ]
         ).then(
                 axios.spread(
@@ -82,13 +76,17 @@ function ProjectList({stageUpdateSink, username}){
 
     return (
         <div className="flex">
-            <Card className="mt-6 w-screen ">
-                <CardBody>
+            <Card className="mt-6 w-screen h-[calc(95%)]">
+                <CardBody className="h-[calc(97%)]">
                     <Typography variant="h5" color="blue-gray" className="mb-2">
                         Проекты пользователя {username}
                     </Typography>
                     <hr className="h-px" />
-                    <div className="grid grid-cols-4 h-full pt-8" >
+                    <div className="grid grid-cols-4
+                                    h-[calc(95%)]
+                                    pt-4 pl-2 pr-2 pb-2
+                                    rounded-lg
+                                    overflow-y-scroll" >
                         <div >
                             <Button
                                 variant="outlined"

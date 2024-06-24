@@ -1,42 +1,37 @@
-import { useKeycloak } from "@react-keycloak/web";
+// import { useKeycloak } from "@react-keycloak/web";
+import axios from "axios";
 
 const API_BASE_URL = 'http://localhost:8000'; // local dev
-// const API_BASE_URL = ''; // server installation
-
 
 // for local dev
 const authProvider = () => {
 
+    let loginStatus = false;
+
+    const providerReady = true;
+
     const keycloakStub = {
+
         tokenParsed: {
                         preferred_username:"architect",
 
                      },
-        token: "adsfsfsfsadfa"
+        token: "adsfsfsfsadfa",
+        authenticated: loginStatus,
+        login: () => {
+            loginStatus = true;
+        },
+        logout: () => {
+            loginStatus = false;
+        }
     }
 
     return {
         keycloak: keycloakStub,
-        initialized: true
+        initialized: providerReady
     }
 
 }
-// const authProvider = useKeycloak; // server instance
-
-
-// server instance
-// const config = () => {
-//
-//     const token = authProvider().keycloak.token
-//
-//     return{
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer ${token}`
-//         }
-//     }
-//
-// }
 
 // dev instance
 const config = () => {
@@ -48,6 +43,28 @@ const config = () => {
     }
 
 }
+
+
+// const API_BASE_URL = 'https://app.simplizio.com'; // server installation
+// const authProvider = useKeycloak; // server instance
+//
+//
+// /* server instance */
+// const config = () => {
+//
+//     const token = authProvider().keycloak.token;
+//
+//     return{
+//         scheme: 'https',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': `Bearer ${token}`
+//         }
+//     }
+//
+// }
+
+axios.defaults.baseURL = API_BASE_URL;
 
 function ApiClient() {
 
