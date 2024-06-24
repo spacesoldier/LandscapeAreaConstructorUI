@@ -1,20 +1,16 @@
 import React from "react";
-import SimpleCard from "./elements/SimpleCard";
-import {FeaturedImageGallery} from "./elements/ImageGallery";
-import {SidebarWithCta} from "./elements/SidebarWithCta";
+
 import {SystemNavbar} from "./elements/SystemNavbar";
-import {Badge, Button, Card, CardBody, CardFooter, Typography} from "@material-tailwind/react";
-import {FaCalculator, FaCheck, FaList, FaPlus} from "react-icons/fa6";
 import ProjectList from "./project/list/ProjectList";
 import DefineProjectContent from "./project/draft/DefineProjectContent";
 import ProjectReport from "./project/report/ProjectReport";
-// import { useKeycloak } from "@react-keycloak/web";
+import ApiClient from "./api/ApiClient";
 
 function ConstructorPage(){
 
-    // const { keycloak, initialized } = useKeycloak();
+    const { keycloak, initialized } = ApiClient().auth_srv();
 
-    const curr_username = "architect"
+    const curr_username = keycloak.tokenParsed.preferred_username ;
 
     const [currentStage,setCurrentStage] = React.useState("projects");
 
@@ -30,7 +26,7 @@ function ConstructorPage(){
         },
         "new-project": (stageSink) => {
             return (
-                <DefineProjectContent stageUpdateSink={stageSink}/>
+                <DefineProjectContent username={curr_username} stageUpdateSink={stageSink}/>
             );
         },
         "project-overview": (stageSink) =>{

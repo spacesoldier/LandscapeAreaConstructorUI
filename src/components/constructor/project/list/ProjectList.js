@@ -4,16 +4,18 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import ProjectCard from "./ProjectCard";
 import {nanoid} from "nanoid";
+import ApiClient from "../../api/ApiClient";
 
 function ProjectList({stageUpdateSink, username}){
 
     const [projects,setProjects] = useState([])
 
+    const {baseUrl, config} = ApiClient();
 
     const retrieveProjectsForUser = async () =>
     {
         try {
-            await axios.get(`http://localhost:8000/maf/projects/${username}`)
+            await axios.get(`${baseUrl}/maf/user/projects/${username}`, config)
                 .then(
                     (prj_response) => {
                         const {data} = prj_response;
@@ -32,12 +34,12 @@ function ProjectList({stageUpdateSink, username}){
         retrieveProjectsForUser();
     },[])
 
-    const config = {
-        headers: {
-            'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${keycloak_token}`
-        }
-    }
+    // const config = {
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         // 'Authorization': `Bearer ${keycloak_token}`
+    //     }
+    // }
 
     const initNewProrject = async () => {
 

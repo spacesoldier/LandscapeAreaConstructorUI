@@ -15,7 +15,8 @@ function ProjectCard({project_data}){
         <Card key={project_data.project_id} className="h-40 w-80 shadow-2xl">
             <CardBody>
                 <Typography>
-                    <span>{project_data.project_name}</span>
+                    {/*<span>{project_data.project_name}</span>*/}
+                    <span>id проекта</span>
                     <hr className="h-px" />
                     <span>{project_data.project_id}</span>
                 </Typography>
