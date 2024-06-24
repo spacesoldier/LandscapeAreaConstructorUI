@@ -8,11 +8,13 @@ import {
     Card,
 } from "@material-tailwind/react";
 import { FaUser } from "react-icons/fa6";
-//  import { useKeycloak } from "@react-keycloak/web";
+import ApiClient from "../../api/ApiClient";
 
 export function SystemNavbar() {
+
+    const {keycloak} = ApiClient().auth_srv();
+
     const [openNav, setOpenNav] = React.useState(false);
-     // const { keycloak, initialized } = useKeycloak();
 
     React.useEffect(() => {
         window.addEventListener(
@@ -57,7 +59,7 @@ export function SystemNavbar() {
                                 variant="gradient"
                                 className="lg:inline-block"
                                 hidden={!openNav}
-                                // onClick={() => keycloak.logout()}
+                                onClick={() => keycloak.logout()}
                             >
                                 Выйти
                             </Button>
@@ -103,15 +105,6 @@ export function SystemNavbar() {
                 </div>
                 <MobileNav open={openNav}>
                     {navList}
-                    {/*<div className="flex items-center gap-x-1">*/}
-                    {/*    <Button*/}
-                    {/*        variant="gradient"*/}
-                    {/*        className="lg:inline-block"*/}
-                    {/*        // onClick={() => keycloak.logout()}*/}
-                    {/*    >*/}
-                    {/*        Выйти*/}
-                    {/*    </Button>*/}
-                    {/*</div>*/}
                 </MobileNav>
             </Navbar>
         </div>
