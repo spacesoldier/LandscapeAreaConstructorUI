@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import ProjectCard from "./ProjectCard";
 import {nanoid} from "nanoid";
-import ApiClient from "../../api/ApiClient";
+import ApiClient from "../../../api/ApiClient";
 
 function ProjectList({stageUpdateSink, username}){
 

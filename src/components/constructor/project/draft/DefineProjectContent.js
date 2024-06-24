@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
 import AreaCard from "./AreaCard";
 import ProjectItem from "./ProjectItem";
-import ApiClient from "../../api/ApiClient";
+import ApiClient from "../../../api/ApiClient";
 
 function DefineProjectContent({stageUpdateSink, username}){
 

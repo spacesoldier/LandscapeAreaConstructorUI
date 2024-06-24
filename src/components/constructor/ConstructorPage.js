@@ -4,7 +4,7 @@ import {SystemNavbar} from "./elements/SystemNavbar";
 import ProjectList from "./project/list/ProjectList";
 import DefineProjectContent from "./project/draft/DefineProjectContent";
 import ProjectReport from "./project/report/ProjectReport";
-import ApiClient from "./api/ApiClient";
+import ApiClient from "../api/ApiClient";
 
 function ConstructorPage(){
 
