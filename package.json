@@ -8,10 +8,12 @@
     "@react-keycloak/web": "^3.4.0",
     "axios": "^1.7.2",
     "framer-motion": "^11.2.11",
+    "leaflet": "^1.9.4",
     "nanoid": "3.3.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^5.2.1",
+    "react-leaflet": "^4.2.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
